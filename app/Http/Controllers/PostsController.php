@@ -103,10 +103,10 @@ class PostsController extends Controller
             $_title = $post->title;
             $_body = $post->body;
             $_user = $post->userId;
-
+            ;
             //Asignamos 2 puntos a la palabra puesta en el título y 1 si es en el cuerpo
-            $_title_score = empty($_title) ? 0 : (substr_count($_title, $word) * 2);
-            $_body_score = empty($_body) ? 0 : + (substr_count($_body, $word));
+            $_title_score = empty($_title) ? 0 : (preg_match_all('/\b'. $word .'\b/', $_title) * 2);
+            $_body_score = empty($_body) ? 0 : + (preg_match_all('/\b'. $word .'\b/', $_body));
 
             //Puntuación del post (score)
             $_score = $_title_score + $_body_score;
